@@ -11,7 +11,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.myarsitektur8.model.DataJK
+import com.example.myarsitektur8.view.FormSiswa
 import com.example.myarsitektur8.viewmodel.SiswaViewModel
 
 enum class PengelolaHalaman {
@@ -34,6 +37,19 @@ fun SiswaApp(
             startDestination = PengelolaHalaman.Formulir.name,
             modifier = Modifier.padding(innerPadding)
         ) {
+            composable(route = PengelolaHalaman.Formulir.name) {
+                FormSiswa(
+                    pilihanJK = DataJK.jenisJK.map { id ->
+                        context.resources.getString(id)
+                    },
+                    onSubmitButtonClicked = { dataSiswa ->
+                        viewModel.setSiswa(dataSiswa)
+                        navController.navigate(PengelolaHalaman.Detail.name)
+                    }
+                )
+            }
+
+
         }
     }
 }
