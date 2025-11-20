@@ -2,9 +2,12 @@ package com.example.myarsitektur8.view
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
@@ -113,7 +116,18 @@ fun FormSiswa(
                 }
             )
 
+            Spacer(Modifier.height(20.dp))
 
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                enabled = txtNama.isNotEmpty() && txtAlamat.isNotEmpty() && txtGender.isNotEmpty(),
+                onClick = {
+                    val listData = mutableListOf(txtNama, txtGender, txtAlamat)
+                    onSubmitButtonClicked(listData)
+                }
+            ) {
+                Text(text = stringResource(R.string.submit))
+            }
         }
     }
 }
