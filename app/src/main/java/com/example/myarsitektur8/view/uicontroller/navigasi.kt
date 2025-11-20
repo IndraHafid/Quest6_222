@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.myarsitektur8.model.DataJK
 import com.example.myarsitektur8.view.FormSiswa
 import com.example.myarsitektur8.viewmodel.SiswaViewModel
+import com.example.myarsitektur8.view.TampilSiswa
 
 enum class PengelolaHalaman {
     Formulir,
@@ -49,7 +50,14 @@ fun SiswaApp(
                 )
             }
 
-
+            composable(route = PengelolaHalaman.Detail.name) {
+                TampilSiswa(
+                    statusUISiswa = uiState,
+                    onBackButtonClicked = {
+                        navController.popBackStack(PengelolaHalaman.Formulir.name, false)
+                    }
+                )
+            }
         }
     }
 }
