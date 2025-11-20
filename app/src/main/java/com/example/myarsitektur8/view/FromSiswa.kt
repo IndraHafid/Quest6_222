@@ -1,11 +1,15 @@
 package com.example.myarsitektur8.view
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -20,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.myarsitektur8.R
@@ -62,6 +67,49 @@ fun FormSiswa(
                 label = { Text(text = "Nama Lengkap") },
                 onValueChange = {
                     txtNama = it
+                }
+            )
+
+            Text("Jenis Kelamin:")
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                pilihanJK.forEach { item ->
+                    Row(
+                        modifier = Modifier.selectable(
+                            selected = txtGender == item,
+                            onClick = {
+                                txtGender = item
+                            }
+                        ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = txtGender == item,
+                            onClick = {
+                                txtGender = item
+                            }
+                        )
+                        Text(text = item)
+                    }
+                }
+            }
+
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 16.dp),
+                thickness = dimensionResource(id = R.dimen.thickness_divider),
+                color = MaterialTheme.colorScheme.secondary
+            )
+
+            OutlinedTextField(
+                value = txtAlamat,
+                shape = MaterialTheme.shapes.large,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp),
+                label = { Text(text = "Alamat Lengkap") },
+                onValueChange = {
+                    txtAlamat = it
                 }
             )
 
