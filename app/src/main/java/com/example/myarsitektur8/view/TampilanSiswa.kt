@@ -1,7 +1,12 @@
 package com.example.myarsitektur8.view
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -13,6 +18,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.myarsitektur8.R
 import com.example.myarsitektur8.model.Siswa
 
@@ -23,6 +33,11 @@ fun TampilSiswa(
     onBackButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val items = listOf(
+        Pair(stringResource(id = R.string.nama), statusUISiswa.nama),
+        Pair(stringResource(id = R.string.gender), statusUISiswa.gender),
+        Pair(stringResource(id = R.string.alamat), statusUISiswa.alamat)
+    )
 
     Scaffold(
         modifier = modifier,
@@ -44,6 +59,29 @@ fun TampilSiswa(
             )
         }
     ) { padding ->
+        Column(
+            modifier = Modifier
+                .padding(padding)
+                .fillMaxWidth(),
+        ) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(dimensionResource(id = R.dimen.padding_medium)),
+                verticalArrangement = Arrangement.spacedBy(
+                    dimensionResource(id = R.dimen.padding_medium)
+                )
+            ) {
+                items.forEach { item ->
+                    Column(modifier = Modifier.padding(vertical = 8.dp)) {
+                        Text(text = item.first.uppercase(), fontSize = 16.sp)
+                        Text(text = item.second, fontWeight = FontWeight.Bold, fontSize = 16.sp)
+                        Divider(thickness = 1.dp, modifier = Modifier.padding(top = 8.dp))
+                    }
+                }
+            }
 
+
+        }
     }
 }
